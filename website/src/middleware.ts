@@ -1,16 +1,11 @@
 import { auth } from "./auth"
 
 export default auth((req) => {
-  const isLoggedIn = !!req.auth;
+  const isLoggedIn = !!req.auth?.user;
   const isDashboardRoute = req.nextUrl.pathname.startsWith('/panel');
-  const isHomeRoute = req.nextUrl.pathname === '/';
 
   if (isDashboardRoute && !isLoggedIn) {
     return Response.redirect(new URL('/', req.nextUrl));
-  }
-
-  if (isHomeRoute && isLoggedIn) {
-    return Response.redirect(new URL('/panel', req.nextUrl));
   }
 })
 
