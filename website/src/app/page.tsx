@@ -19,28 +19,19 @@ export default async function Home() {
         </p>
 
         <div className="flex flex-row items-center gap-4 mt-2">
-          {session ? (
-            <Link
-              href="/panel"
+          <form
+            action={async () => {
+              "use server"
+              await signIn("discord", { redirectTo: "/panel" })
+            }}
+          >
+            <button
+              type="submit"
               className="bg-[#171820] hover:bg-[#20212b] active:scale-[0.98] transition-all text-white text-[13px] font-medium py-2 px-5 rounded-xl border border-white/[0.03] cursor-pointer"
             >
-              Go to Dashboard
-            </Link>
-          ) : (
-            <form
-              action={async () => {
-                "use server"
-                await signIn("discord", { redirectTo: "/panel" })
-              }}
-            >
-              <button
-                type="submit"
-                className="bg-[#171820] hover:bg-[#20212b] active:scale-[0.98] transition-all text-white text-[13px] font-medium py-2 px-5 rounded-xl border border-white/[0.03] cursor-pointer"
-              >
-                Login with Discord
-              </button>
-            </form>
-          )}
+              Login with Discord
+            </button>
+          </form>
 
           <a
             href="https://github.com/hypecavess/lithium"
